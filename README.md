@@ -1,4 +1,4 @@
-# NaijaBridge source code
+# NaijaBridge (bridgecart)
 
 This package contains the NaijaBridge website design and product-cost calculator.
 
