@@ -1,0 +1,129 @@
+/* account.html — shopper dashboard. Loaded only here, kept separate from styles.css given its size. */
+
+.dash-main { max-width: 1180px; margin: 0 auto; padding: 40px clamp(20px, 5vw, 32px) 90px; display: grid; gap: 22px; }
+
+.dash-flash { padding: 13px 16px; border-radius: 10px; background: var(--green-soft); color: var(--green-dark); font-size: 13px; font-weight: 700; }
+.dash-flash-error { background: #fdf3f2; color: #c8433d; }
+
+.dash-header-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 26px 30px; border-radius: 18px; background: var(--navy); color: white; flex-wrap: wrap; }
+.dash-header-card .eyebrow { color: #84e3bf; }
+.dash-header-info h1 { margin: 6px 0 12px; font-family: "Manrope", sans-serif; font-size: clamp(24px, 3vw, 32px); letter-spacing: -1px; }
+.dash-header-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.dash-shopper-code { font: 800 15px "Manrope", sans-serif; letter-spacing: -.2px; padding: 6px 12px; border-radius: 100px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); }
+.dash-header-card .small-button.ghost { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); color: white; }
+.dash-header-card .small-button.ghost:hover { background: rgba(255,255,255,.16); }
+
+.dash-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.dash-stat-card { padding: 20px 22px; border-radius: 16px; background: white; box-shadow: 0 10px 30px rgba(7,26,43,.06); border: 1px solid var(--line); }
+.dash-stat-card span { display: block; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 8px; }
+.dash-stat-card strong { display: block; font: 800 26px "Manrope", sans-serif; color: var(--navy); letter-spacing: -.8px; }
+
+.dash-grid { display: grid; grid-template-columns: 1.65fr 1fr; gap: 22px; align-items: start; }
+.dash-col-main, .dash-col-side { display: grid; gap: 22px; }
+
+.dash-panel { padding: 24px 26px 28px; border-radius: 18px; background: white; border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(7,26,43,.05); }
+.dash-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.dash-panel-head h2 { margin: 0; font-family: "Manrope", sans-serif; font-size: 18px; letter-spacing: -.4px; color: var(--navy); }
+.dash-panel-count { color: var(--muted); font-size: 12px; font-weight: 700; }
+
+.dash-fact-list { display: grid; gap: 10px; margin: 0; }
+.dash-fact-list > div { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+.dash-fact-list > div:last-child { border-bottom: 0; }
+.dash-fact-list dt { color: var(--muted); font-weight: 600; }
+.dash-fact-list dd { margin: 0; color: var(--ink); font-weight: 700; text-align: right; }
+.dash-ship-to dd { text-align: left; font-weight: 600; max-width: 60%; }
+
+.dash-kyc-note { margin-top: 12px; padding: 11px 13px; border-radius: 10px; background: #fff3d7; color: #6e5423; font-size: 12px; line-height: 1.5; }
+.dash-id-thumb { margin-top: 14px; }
+.dash-id-thumb img { width: 100%; max-height: 160px; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.dash-kyc-media { margin-top: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dash-kyc-media > div { min-width: 0; }
+.dash-kyc-media-label { display: block; color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; }
+.dash-kyc-footnote { margin: 14px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+@media (max-width: 560px) {
+  .dash-kyc-media { grid-template-columns: 1fr; }
+}
+
+.dash-form { display: grid; gap: 13px; margin-top: 4px; }
+.dash-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.dash-form .primary-button { margin-top: 4px; }
+
+.dash-messages-list { display: grid; gap: 12px; }
+.dash-message { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.dash-message.unread { border-color: var(--green); background: var(--green-soft); }
+.dash-message-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.dash-message-head strong { color: var(--navy); font-size: 14px; }
+.dash-message-head span { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.dash-message p { margin: 0 0 6px; font-size: 13px; line-height: 1.55; color: var(--ink); white-space: pre-wrap; }
+
+.dash-orders-list { display: grid; gap: 16px; }
+.dash-order-card { display: grid; grid-template-columns: 128px 1fr; gap: 18px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
+.dash-order-media { width: 128px; height: 128px; border-radius: 10px; overflow: hidden; background: #eef2f4; }
+.dash-order-media img { width: 100%; height: 100%; object-fit: cover; }
+.dash-order-content { min-width: 0; display: grid; gap: 10px; }
+.dash-order-content-full { grid-column: 1 / -1; }
+.dash-order-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.dash-order-title-block { display: grid; gap: 3px; min-width: 0; }
+.dash-order-title-block strong { font-size: 15px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 380px; }
+.dash-order-id { color: var(--muted); font-size: 11px; font-weight: 600; }
+.dash-product-link { color: var(--green-dark); font-size: 12px; font-weight: 700; }
+.dash-product-link:hover { text-decoration: underline; }
+
+/* One order can now hold several line items — each gets its own thumbnail row rather than one flattened
+   screenshot/title per order. */
+.dash-order-items { display: grid; gap: 10px; min-width: 0; }
+.dash-item-row { display: grid; grid-template-columns: 88px 1fr; gap: 14px; min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: white; }
+.dash-item-thumbs { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }
+.dash-item-thumbs img { width: 42px; height: 42px; object-fit: cover; border-radius: 6px; background: #eef2f4; }
+.dash-item-thumbs-empty { align-items: center; justify-content: center; width: 88px; height: 42px; color: var(--muted); font-size: 10px; background: #eef2f4; border-radius: 6px; }
+.dash-item-info { min-width: 0; display: grid; gap: 3px; }
+.dash-item-info strong { font-size: 13px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dash-item-meta { color: var(--muted); font-size: 11px; font-weight: 600; }
+.dash-item-description { color: #53626b; font-size: 12px; }
+
+.dash-order-banner { padding: 9px 12px; border-radius: 9px; background: var(--green-soft); color: var(--green-dark); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.dash-order-banner-warn { background: #fff3d7; color: #8a6414; }
+.dash-order-banner-ok { background: var(--green-soft); color: var(--green-dark); }
+
+.dash-order-facts { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.dash-order-facts > div { display: grid; gap: 1px; }
+.dash-order-facts span { color: var(--muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; }
+.dash-order-facts b { color: var(--ink); font-size: 12px; }
+
+.dash-order-total { font-size: 13px; color: var(--ink); }
+.dash-breakdown summary { cursor: pointer; font-size: 12px; font-weight: 700; color: var(--navy); }
+.dash-breakdown-grid { margin-top: 10px; display: grid; gap: 6px; }
+.dash-breakdown-grid > div { display: flex; justify-content: space-between; font-size: 12px; color: #53626b; }
+.dash-breakdown-grid b { color: #273a49; }
+
+.dash-order-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.dash-table-wrap { overflow-x: auto; }
+.dash-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+.dash-table th { text-align: left; padding: 10px 12px; background: var(--paper); color: #53626b; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; white-space: nowrap; }
+.dash-table td { padding: 12px; border-top: 1px solid var(--line); vertical-align: top; }
+.dash-ref-code { font: 700 12px "Manrope", sans-serif; color: var(--navy); }
+.dash-decision-reason { margin-top: 4px; color: #c8433d; font-size: 11px; }
+
+/* Embedded "Submit a new order" calculator inside the orders panel (site/order-form.js) — reuses
+   index.html's .calculator-shell/.quote-card styling verbatim; only the outer framing is toned down since
+   it now sits inside an already-bordered .dash-panel instead of directly on the dark hero background. */
+.new-order-form-wrap { margin-bottom: 18px; }
+.new-order-calculator-shell { box-shadow: none; border: 1px solid var(--line); border-radius: 14px; }
+.new-order-calculator-shell .calculator-card { padding: 24px; }
+.new-order-calculator-shell .quote-card { padding: 24px; }
+
+@media (max-width: 980px) {
+  .dash-grid { grid-template-columns: 1fr; }
+  .dash-stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 620px) {
+  .dash-header-card { flex-direction: column; align-items: flex-start; }
+  .dash-stats-grid { grid-template-columns: 1fr; }
+  .dash-order-card { grid-template-columns: 1fr; }
+  .dash-order-media { width: 100%; height: 180px; }
+  .dash-item-row { grid-template-columns: 1fr; }
+  .dash-form-row { grid-template-columns: 1fr; }
+}

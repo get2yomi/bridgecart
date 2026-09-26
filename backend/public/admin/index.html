@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NaijaBridge Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./admin.css" />
+</head>
+<body>
+
+  <div id="login-screen" class="login-screen">
+    <form id="login-form" class="login-card" novalidate>
+      <div class="brand"><span class="brand-mark">NB</span><span>NaijaBridge Admin</span></div>
+      <h1>Admin sign in</h1>
+      <p class="muted">Sign in with your admin account to review shoppers, orders, and payments.</p>
+      <label class="field"><span>Email</span><input id="login-email" type="email" autocomplete="username" required /></label>
+      <label class="field"><span>Password</span><input id="login-password" type="password" autocomplete="current-password" required /></label>
+      <p id="login-error" class="form-error" hidden></p>
+      <button class="primary-button" type="submit">Sign in</button>
+    </form>
+  </div>
+
+  <div id="app-screen" class="app-screen" hidden>
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">NB</span><span>NaijaBridge</span></div>
+      <nav>
+        <button class="nav-item active" data-tab="verifications" type="button">
+          <span>Shopper verifications</span><span class="badge" id="badge-verifications" hidden>0</span>
+        </button>
+        <button class="nav-item" data-tab="shoppers" type="button"><span>Shoppers</span></button>
+        <button class="nav-item" data-tab="orders" type="button">
+          <span>Orders</span><span class="badge" id="badge-orders" hidden>0</span>
+        </button>
+        <button class="nav-item" data-tab="payments" type="button">
+          <span>Payments</span><span class="badge" id="badge-payments" hidden>0</span>
+        </button>
+        <button class="nav-item" data-tab="subscriptions" type="button"><span>Subscriptions</span></button>
+        <button class="nav-item" data-tab="approvals" id="nav-approvals" type="button" hidden>
+          <span>Approvals</span><span class="badge" id="badge-approvals" hidden>0</span>
+        </button>
+        <button class="nav-item" data-tab="staff" id="nav-staff" type="button" hidden><span>Staff</span></button>
+        <button class="nav-item" data-tab="activity" type="button"><span>Activity report</span></button>
+        <button class="nav-item" data-tab="settings" type="button"><span>Settings</span></button>
+      </nav>
+      <div class="sidebar-footer">
+        <span id="admin-email" class="muted"></span>
+        <span id="admin-role" class="role-tag"></span>
+        <button id="logout-button" class="text-button" type="button">Log out</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section id="tab-verifications" class="tab-panel">
+        <header class="panel-header">
+          <div><h2>Shopper verifications</h2><p class="muted">Review submitted ID documents and approve or reject new shoppers.</p></div>
+          <div class="filter-row">
+            <input id="verifications-search" type="search" placeholder="Search name, email, username, code, NIN…" class="search-input" />
+            <select id="verifications-filter">
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="">All</option>
+            </select>
+            <button class="ghost-button" id="verifications-refresh" type="button">Refresh</button>
+          </div>
+        </header>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>Shopper</th><th>Code</th><th>Email</th><th>NIN</th><th>ID type</th><th>ID number</th><th>Submitted</th><th>Status</th><th>Note</th><th></th></tr></thead>
+          <tbody id="verifications-body"></tbody>
+        </table></div>
+        <p class="empty-state" id="verifications-empty" hidden>No shoppers in this status.</p>
+      </section>
+
+      <section id="tab-shoppers" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Shoppers</h2><p class="muted">Every shopper who has registered, regardless of verification status.</p></div>
+          <div class="filter-row">
+            <input id="shoppers-search" type="search" placeholder="Search name, email, username, code, phone…" class="search-input" />
+            <select id="shoppers-status-filter">
+              <option value="">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+            <button class="ghost-button" id="shoppers-refresh" type="button">Refresh</button>
+          </div>
+        </header>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>Shopper</th><th>Code</th><th>Email</th><th>Username</th><th>Phone</th><th>Location</th><th>Orders</th><th>Status</th><th>Registered</th><th></th></tr></thead>
+          <tbody id="shoppers-body"></tbody>
+        </table></div>
+        <p class="empty-state" id="shoppers-empty" hidden>No shoppers match this search.</p>
+      </section>
+
+      <section id="tab-orders" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Orders</h2><p class="muted">Review, price, and confirm shopper orders.</p></div>
+          <div class="filter-row">
+            <input id="orders-search" type="search" placeholder="Search order #, item, shopper, tracking…" class="search-input" />
+            <select id="orders-filter">
+              <option value="pending_confirmation">Pending confirmation</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="awaiting_payment">Awaiting payment</option>
+              <option value="paid">Paid</option>
+              <option value="purchased">Purchased</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="rejected">Rejected</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="">All</option>
+            </select>
+            <button class="ghost-button" id="orders-refresh" type="button">Refresh</button>
+          </div>
+        </header>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>Order</th><th>Item ID</th><th>Shopper ID</th><th>Shopper</th><th>Item</th><th>Total (USD)</th><th>Status</th><th>Created</th><th></th></tr></thead>
+          <tbody id="orders-body"></tbody>
+        </table></div>
+        <p class="empty-state" id="orders-empty" hidden>No orders in this status.</p>
+      </section>
+
+      <section id="tab-payments" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Payments</h2><p class="muted">Confirm or reject payment claims from shoppers.</p></div>
+          <div class="filter-row">
+            <input id="payments-search" type="search" placeholder="Search reference, shopper, order #…" class="search-input" />
+            <select id="payments-filter">
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="rejected">Rejected</option>
+              <option value="">All</option>
+            </select>
+            <button class="ghost-button" id="payments-refresh" type="button">Refresh</button>
+            <input id="payments-report-shopper-id" type="number" min="1" placeholder="Shopper ID" class="report-shopper-input" />
+            <button class="ghost-button" id="payments-export-shopper" type="button">Export shopper CSV</button>
+            <button class="ghost-button" id="payments-export-all" type="button">Export all CSV</button>
+          </div>
+        </header>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>Reference</th><th>Shopper ID</th><th>For</th><th>Shopper</th><th>Method</th><th>Amount</th><th>Status</th><th>Created</th><th></th></tr></thead>
+          <tbody id="payments-body"></tbody>
+        </table></div>
+        <p class="empty-state" id="payments-empty" hidden>No payments in this status.</p>
+      </section>
+
+      <section id="tab-subscriptions" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Address subscriptions</h2><p class="muted">All dedicated U.S. address subscriptions.</p></div>
+          <div class="filter-row">
+            <input id="subscriptions-search" type="search" placeholder="Search shopper name, code, email…" class="search-input" />
+            <select id="subscriptions-filter">
+              <option value="">All</option>
+              <option value="pending_payment">Pending payment</option>
+              <option value="active">Active</option>
+              <option value="expired">Expired</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button class="ghost-button" id="subscriptions-refresh" type="button">Refresh</button>
+          </div>
+        </header>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>Shopper</th><th>Price (USD)</th><th>Status</th><th>Period</th><th>Created</th></tr></thead>
+          <tbody id="subscriptions-body"></tbody>
+        </table></div>
+        <p class="empty-state" id="subscriptions-empty" hidden>No subscriptions yet.</p>
+      </section>
+
+      <section id="tab-approvals" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Approvals</h2><p class="muted">Actions submitted by staff that require supervisor or owner sign-off.</p></div>
+          <div class="filter-row">
+            <input id="approvals-search" type="search" placeholder="Search requester or action…" class="search-input" />
+            <select id="approvals-filter">
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="denied">Denied</option>
+              <option value="">All</option>
+            </select>
+            <button class="ghost-button" id="approvals-refresh" type="button">Refresh</button>
+          </div>
+        </header>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>Requested</th><th>Action</th><th>Requested by</th><th>Target</th><th>Reason</th><th></th></tr></thead>
+          <tbody id="approvals-body"></tbody>
+        </table></div>
+        <p class="empty-state" id="approvals-empty" hidden>No pending approval requests.</p>
+      </section>
+
+      <section id="tab-staff" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Staff accounts</h2><p class="muted">Owners can create staff accounts and manage roles.</p></div>
+          <div class="filter-row">
+            <input id="staff-search" type="search" placeholder="Search name, email, username…" class="search-input" />
+            <select id="staff-role-filter">
+              <option value="">All roles</option>
+              <option value="owner">Owner</option>
+              <option value="supervisor">Supervisor</option>
+              <option value="staff">Staff</option>
+            </select>
+            <select id="staff-active-filter">
+              <option value="">Any status</option>
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
+            </select>
+            <button class="ghost-button" id="staff-refresh" type="button">Refresh</button>
+          </div>
+        </header>
+        <form id="staff-form" class="staff-form">
+          <label class="field"><span>First name</span><input id="staff-first-name" required /></label>
+          <label class="field"><span>Last name</span><input id="staff-last-name" required /></label>
+          <label class="field"><span>Username</span><input id="staff-username" required /></label>
+          <label class="field"><span>Email</span><input id="staff-email" type="email" required /></label>
+          <label class="field"><span>Password</span><input id="staff-password" type="password" required minlength="8" /></label>
+          <label class="field"><span>Role</span>
+            <select id="staff-role">
+              <option value="staff">Staff</option>
+              <option value="supervisor">Supervisor</option>
+              <option value="owner">Owner</option>
+            </select>
+          </label>
+          <button class="primary-button" type="submit">Create staff account</button>
+        </form>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th></th></tr></thead>
+          <tbody id="staff-body"></tbody>
+        </table></div>
+      </section>
+
+      <section id="tab-activity" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Activity report</h2><p class="muted">Audit trail of every staff action taken in this system.</p></div>
+          <div class="filter-row activity-filters">
+            <input id="activity-search" type="search" placeholder="Search actor or action…" class="search-input" />
+            <input id="activity-actor" placeholder="Filter by actor" hidden />
+            <input id="activity-action" placeholder="Filter by action" hidden />
+            <input id="activity-from" type="date" />
+            <input id="activity-to" type="date" />
+            <select id="activity-actor-type">
+              <option value="">All actor types</option>
+              <option value="staff">Staff</option>
+              <option value="shopper">Shopper</option>
+              <option value="system">System</option>
+            </select>
+            <button class="ghost-button" id="activity-filter-apply" type="button">Apply</button>
+            <button class="ghost-button" id="activity-refresh" type="button">Refresh</button>
+            <button class="ghost-button" id="activity-export-csv" type="button">Export CSV</button>
+            <button class="ghost-button" id="activity-print" type="button">Print</button>
+          </div>
+        </header>
+        <div class="table-wrap print-area"><table>
+          <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Target</th><th>Details</th></tr></thead>
+          <tbody id="activity-body"></tbody>
+        </table></div>
+        <p class="empty-state" id="activity-empty" hidden>No activity recorded yet.</p>
+      </section>
+
+      <section id="tab-settings" class="tab-panel" hidden>
+        <header class="panel-header">
+          <div><h2>Settings</h2><p class="muted">Exchange rate, subscription pricing, and bank transfer details shown to shoppers.</p></div>
+        </header>
+        <div class="settings-grid" id="settings-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="detail-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true">
+      <button class="close-button" type="button" data-close-modal aria-label="Close">×</button>
+      <div id="modal-body"></div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="./admin.js"></script>
+</body>
+</html>

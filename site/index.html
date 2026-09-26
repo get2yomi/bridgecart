@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Paste a U.S. product link, see your complete landed cost, and arrange delivery to Nigeria." />
+  <title>NaijaBridge — Buy in the USA, deliver to Nigeria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="NaijaBridge home">
+      <span class="brand-mark" aria-hidden="true">NB</span>
+      <span>NaijaBridge</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="#shipping">Shipping</a>
+      <a class="track-link" href="./account.html">Track order</a>
+    </nav>
+    <button class="account-button" type="button" id="account-button">My account</button>
+  </header>
+
+  <main id="top">
+    <section class="quote-hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="route-label">
+          <span>USA</span><span class="route-line" aria-hidden="true"></span><span>NIGERIA</span>
+        </div>
+        <h1 id="hero-title">See the full cost before you buy.</h1>
+        <p>Paste a product link from a U.S. store. We’ll estimate the item, tax, customs, service, and delivery costs to Nigeria in one clear quote.</p>
+        <div class="trust-row" aria-label="Service benefits">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12 2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Verified U.S. purchasing</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7 9 18l-5-5"/></svg>Upfront cost breakdown</span>
+        </div>
+      </div>
+
+      <div class="calculator-shell">
+        <div class="calculator-card">
+          <div class="card-heading">
+            <div>
+              <span class="eyebrow">INSTANT ESTIMATE</span>
+              <h2>What do you want to buy?</h2>
+            </div>
+            <span class="prototype-pill">Pricing preview</span>
+          </div>
+
+          <template id="item-block-template">
+            <div class="item-block" data-item-block>
+              <div class="item-block-head">
+                <strong class="item-block-title" data-item-number>Item 1</strong>
+                <button class="item-remove-button" type="button" data-remove-item aria-label="Remove this item">Remove</button>
+              </div>
+
+              <label class="field full-width">
+                <span>Product link</span>
+                <span class="url-input-wrap">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  <input type="url" data-field="productUrl" autocomplete="url" placeholder="Paste Amazon, Walmart, eBay, Best Buy link…" />
+                  <button class="paste-button" type="button" data-paste-button>Paste</button>
+                </span>
+                <small data-url-message>Links from any online store are accepted. Some stores may require manual verification.</small>
+              </label>
+
+              <div class="link-actions">
+                <button class="analyze-button" type="button" data-analyze-link>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+                  Get item details
+                </button>
+                <span class="warehouse-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Indiana receiving office</span>
+              </div>
+
+              <div class="screenshot-upload" data-image-upload>
+                <label class="screenshot-drop">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4-4 4M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+                  <span><strong>Upload photo(s) of the item <span class="required-mark">Required</span></strong><small>PNG, JPG, or WEBP, up to 8MB each. Add several to show color/size/label.</small></span>
+                  <input type="file" accept="image/png,image/jpeg,image/webp" multiple data-image-input />
+                </label>
+                <div class="screenshot-preview-grid" data-image-preview-grid hidden></div>
+                <small class="screenshot-message" data-image-message hidden>At least one photo of the item is required before checkout.</small>
+              </div>
+
+              <div class="detected-store" data-detected-store hidden>
+                <span class="store-icon" data-store-icon>A</span>
+                <div><strong data-store-name>Amazon detected</strong><small data-store-status>Product information found. Review highlighted fields before checkout.</small></div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+
+              <article class="product-preview" data-product-preview hidden>
+                <div class="product-image-wrap">
+                  <img data-product-image alt="Retrieved product" />
+                  <span>No image</span>
+                </div>
+                <div class="product-preview-copy">
+                  <span class="product-found-label">PRODUCT FOUND</span>
+                  <h3 data-product-title>Product name</h3>
+                  <div class="product-facts">
+                    <span><small>Store price</small><strong data-product-price>$0.00</strong></span>
+                    <span><small>Store delivery</small><strong data-product-delivery>Confirm at checkout</strong></span>
+                  </div>
+                </div>
+              </article>
+
+              <div class="form-grid">
+                <label class="field">
+                  <span>Item price</span>
+                  <span class="money-input"><b>$</b><input type="number" data-field="price" inputmode="decimal" min="0.01" step="0.01" value="249.99" required /></span>
+                </label>
+                <label class="field">
+                  <span>Quantity</span>
+                  <select data-field="quantity">
+                    <option value="1">1 item</option>
+                    <option value="2">2 items</option>
+                    <option value="3">3 items</option>
+                    <option value="4">4 items</option>
+                    <option value="5">5 items</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Estimated weight</span>
+                  <span class="suffix-input"><input type="number" data-field="weight" inputmode="decimal" min="0.2" step="0.1" value="3.5" required /><b>lb</b></span>
+                </label>
+                <label class="field">
+                  <span>Item category</span>
+                  <select data-field="category">
+                    <option value="electronics">Electronics</option>
+                    <option value="fashion">Fashion & shoes</option>
+                    <option value="beauty">Beauty & personal care</option>
+                    <option value="home">Home & kitchen</option>
+                    <option value="auto">Auto parts</option>
+                    <option value="other">Other</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Color / variant <small>(optional)</small></span>
+                  <input type="text" data-field="colorVariant" placeholder="e.g. Black, Size M" />
+                </label>
+                <label class="field full-width">
+                  <span>Note / description <small>(optional)</small></span>
+                  <input type="text" data-field="description" placeholder="Anything else we should know about this item" />
+                </label>
+              </div>
+            </div>
+          </template>
+
+          <form id="quote-form" novalidate>
+            <div id="items-container"></div>
+
+            <button id="add-item-button" class="add-item-button" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Add another item
+            </button>
+
+            <div class="form-grid">
+              <label class="field">
+                <span>Indiana sales tax estimate</span>
+                <span class="suffix-input"><input id="tax-rate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="7.00" /><b>%</b></span>
+              </label>
+              <label class="field">
+                <span>Store delivery to U.S. office</span>
+                <span class="money-input shipping-cost-input"><b>$</b><input id="store-shipping" type="number" inputmode="decimal" min="0" step="0.01" value="0.00" disabled /></span>
+                <span class="free-shipping-control"><input id="free-store-shipping" type="checkbox" checked /> Store offers free shipping</span>
+              </label>
+            </div>
+
+            <fieldset class="shipping-options">
+              <legend>How fast do you need it?</legend>
+              <label class="shipping-option active">
+                <input type="radio" name="speed" value="air" checked />
+                <span class="radio-dot"></span>
+                <span><strong>Standard air</strong><small>7–12 business days</small></span>
+                <b>$8.75/lb</b>
+              </label>
+              <label class="shipping-option">
+                <input type="radio" name="speed" value="express" />
+                <span class="radio-dot"></span>
+                <span><strong>Express air</strong><small>3–6 business days</small></span>
+                <b>$13.50/lb</b>
+              </label>
+              <label class="shipping-option">
+                <input type="radio" name="speed" value="sea" />
+                <span class="radio-dot"></span>
+                <span><strong>Sea freight</strong><small>4–8 weeks</small></span>
+                <b>$2.80/lb</b>
+              </label>
+            </fieldset>
+
+            <label class="insurance-row">
+              <input id="insurance" type="checkbox" checked />
+              <span><strong>Add purchase protection</strong><small>Covers loss or damage up to the item value</small></span>
+              <b>1.5%</b>
+            </label>
+
+            <label class="insurance-row">
+              <input id="quality-inspection" type="checkbox" />
+              <span><strong>Add quality inspection</strong><small>Photo-verified quality check before shipping</small></span>
+              <b id="quality-inspection-fee-label">$15</b>
+            </label>
+          </form>
+        </div>
+
+        <aside class="quote-card" aria-live="polite" aria-label="Estimated cost breakdown">
+          <div class="quote-topline">
+            <div><span class="eyebrow">YOUR ESTIMATE</span><small>Example rate: $1 = <span id="fx-label">₦1,650</span></small></div>
+            <div class="currency-toggle" role="group" aria-label="Display currency">
+              <button type="button" class="active" data-currency="usd">USD</button>
+              <button type="button" data-currency="ngn">NGN</button>
+            </div>
+          </div>
+
+          <div class="total-block">
+            <span>Estimated total</span>
+            <strong id="grand-total">$364.55</strong>
+            <small id="delivery-window">Arrives in Nigeria in 7–12 business days</small>
+          </div>
+
+          <div class="breakdown">
+            <div><span>Items subtotal</span><b id="subtotal-line">$249.99</b></div>
+            <div><span>Store tax to Indiana <button class="info" type="button" title="Estimated sales tax for delivery to the U.S. receiving office">?</button></span><b id="tax-line">$17.50</b></div>
+            <div><span>Store delivery to office</span><b id="us-delivery-line" class="free-value">FREE</b></div>
+            <div><span>International shipping <button class="info" type="button" title="Calculated once for the whole shipment, on the combined weight of every item">?</button></span><b id="shipping-line">$30.63</b></div>
+            <div><span>Estimated customs & duty</span><b id="duty-line">$25.67</b></div>
+            <div><span>Purchase protection</span><b id="insurance-line">$3.75</b></div>
+            <div><span>Quality inspection</span><b id="quality-inspection-line">$0.00</b></div>
+            <div><span>NaijaBridge service fee</span><b id="service-line">$18.75</b></div>
+          </div>
+
+          <div class="quote-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.9 17a2 2 0 0 0 1.74 3h14.72a2 2 0 0 0 1.74-3L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
+            Final cost is confirmed after we verify the product’s price, size, and import category.
+          </div>
+
+          <button class="primary-button" id="checkout-button" type="button">Continue to checkout <span aria-hidden="true">→</span></button>
+          <p class="secure-line"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4M5 11h14v10H5z"/></svg>Secure checkout · USD and NGN payment options</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="supported-strip" aria-label="Supported retailers">
+      <span>SHOP FROM</span><b>amazon</b><b>Walmart</b><b>eBay</b><b>Best Buy</b><b>NIKE</b><b>Apple</b>
+    </section>
+
+    <section class="steps-section" id="how-it-works">
+      <div class="section-kicker">SIMPLE FROM LINK TO DELIVERY</div>
+      <div class="section-heading"><h2>Your U.S. shopping address, handled.</h2><p>One payment covers the item, purchasing, customs estimate, and delivery coordination.</p></div>
+      <div class="steps-grid">
+        <article><span class="step-number">01</span><div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><h3>Paste your link</h3><p>Copy the item link from any supported U.S. store and add its price and estimated weight.</p></article>
+        <article><span class="step-number">02</span><div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14h18V6l-3-4H6Zm-3 4h18M16 10a4 4 0 0 1-8 0"/></svg></div><h3>We buy and receive it</h3><p>After payment and verification, we purchase the item and receive it at our U.S. office.</p></article>
+        <article><span class="step-number">03</span><div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h2l2-5h10l4 5h-2M5 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm10 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0ZM7 12V7h7l3 5"/></svg></div><h3>Delivered in Nigeria</h3><p>Track every stage, then receive your order at your chosen Nigerian address or pickup point.</p></article>
+      </div>
+    </section>
+
+    <section class="shipping-section" id="shipping">
+      <div class="shipping-card">
+        <div><span class="section-kicker">CLEAR PRICING</span><h2>No mystery charges when your package lands.</h2><p>Your estimate shows each cost separately. If a retailer’s price or package details change, you approve the updated quote before we continue.</p></div>
+        <ul>
+          <li><span>✓</span>Item and U.S. store tax</li>
+          <li><span>✓</span>International freight by actual or dimensional weight</li>
+          <li><span>✓</span>Estimated Nigerian customs and duty</li>
+          <li><span>✓</span>Service and optional protection fees</li>
+        </ul>
+      </div>
+      <div class="notice-card"><span>Before you order</span><h3>Some items need special handling.</h3><p>Perfumes, batteries, food, medicines, cash, weapons, and hazardous products may be restricted or cost more to ship. Every order is checked before purchase.</p><a href="#top">Check an item <span aria-hidden="true">→</span></a></div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#top"><span class="brand-mark">NB</span><span>NaijaBridge</span></a>
+    <p>Shop U.S. stores. We handle the bridge to Nigeria.</p>
+    <div><a href="#how-it-works">How it works</a><a href="./account.html">Track order</a><a href="./privacy.html">Privacy &amp; Terms</a><a href="mailto:help@naijabridge.example">Support</a></div>
+    <small>Prototype website — live purchases and payments are not yet enabled.</small>
+  </footer>
+
+  <div class="modal-backdrop" id="checkout-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+      <button class="close-button" type="button" data-close-modal aria-label="Close checkout">×</button>
+      <div class="modal-progress"><span class="active"></span><span></span><span></span></div>
+      <span class="eyebrow">SUBMIT ORDER</span>
+      <h2 id="checkout-title">Where should we deliver?</h2>
+      <p>By default we ship to your own registered address. Sending this as a gift or to someone else? Turn on the override below and enter their details.</p>
+      <form id="checkout-form">
+        <label class="insurance-row"><input id="ship-to-other" type="checkbox" /><span><strong>Ship to a different recipient for this order</strong><small>Leave unchecked to use your registered name, phone, and address</small></span></label>
+        <div class="form-grid" id="checkout-override-fields" hidden>
+          <label class="field"><span>Recipient first name</span><input id="checkout-first-name" type="text" placeholder="First name" /></label>
+          <label class="field"><span>Recipient last name</span><input id="checkout-last-name" type="text" placeholder="Last name" /></label>
+          <label class="field full-width"><span>Phone number</span><input id="checkout-phone" type="tel" placeholder="+234 800 000 0000" /></label>
+          <label class="field full-width"><span>Delivery address</span><input id="checkout-address" type="text" placeholder="Street address" /></label>
+          <label class="field"><span>State</span><select id="checkout-state"><option value="">Choose state</option><option>Lagos</option><option>Abuja FCT</option><option>Oyo</option><option>Ogun</option><option>Rivers</option><option>Other</option></select></label>
+          <label class="field"><span>City</span><input id="checkout-city" type="text" placeholder="City" /></label>
+        </div>
+        <div class="checkout-summary"><span>Estimated order total</span><strong id="modal-total">$364.55</strong></div>
+        <p id="checkout-error" class="form-error" hidden></p>
+        <button class="primary-button" type="submit">Submit order for review <span aria-hidden="true">→</span></button>
+      </form>
+      <div class="demo-warning">Final pricing is confirmed by our team before payment.</div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="order-success-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="order-success-title">
+      <button class="close-button" type="button" data-close-modal aria-label="Close">×</button>
+      <span class="eyebrow">ORDER RECEIVED</span>
+      <h2 id="order-success-title">Your order is pending confirmation.</h2>
+      <p>Our team is verifying the item price and details. You’ll be able to pay once it’s confirmed — check "My account" for updates.</p>
+      <div class="checkout-summary"><span>Order reference</span><strong id="order-success-id">#0</strong></div>
+      <button class="primary-button" type="button" data-close-modal>Done</button>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="auth-modal" hidden>
+    <section class="modal auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <button class="close-button" type="button" data-close-modal aria-label="Close">×</button>
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab active" data-auth-tab="login">Log in</button>
+        <button type="button" class="auth-tab" data-auth-tab="register">Register</button>
+      </div>
+
+      <div id="auth-panel-login" class="auth-panel">
+        <span class="eyebrow">WELCOME BACK</span>
+        <h2 id="auth-title">Log in to your account</h2>
+        <p>Log in to submit orders, view status, and pay once confirmed.</p>
+        <form id="login-form">
+          <label class="field full-width"><span>Email or username</span><input id="login-email" type="text" autocomplete="username" required /></label>
+          <label class="field full-width"><span>Password</span><input id="login-password" type="password" autocomplete="current-password" required minlength="8" /></label>
+          <p id="login-error" class="form-error" hidden></p>
+          <button class="primary-button" type="submit">Log in <span aria-hidden="true">→</span></button>
+          <button type="button" class="link-button" id="forgot-password-link">Forgot password?</button>
+        </form>
+        <form id="forgot-password-form" hidden>
+          <label class="field full-width"><span>Email</span><input id="forgot-email" type="email" required /></label>
+          <p id="forgot-password-message" class="form-success" hidden></p>
+          <button class="primary-button" type="submit">Send reset link <span aria-hidden="true">→</span></button>
+          <button type="button" class="link-button" id="cancel-forgot-password">Back to log in</button>
+        </form>
+      </div>
+
+      <div id="auth-panel-register" class="auth-panel" hidden>
+        <span class="eyebrow">CREATE ACCOUNT</span>
+        <h2>Register as a shopper</h2>
+        <form id="register-form">
+          <div class="form-grid">
+            <label class="field"><span>First name</span><input id="reg-first-name" type="text" required /></label>
+            <label class="field"><span>Last name</span><input id="reg-last-name" type="text" required /></label>
+            <label class="field"><span>Payer first name <small>(must match your first name)</small></span><input id="reg-payer-first-name" type="text" required /></label>
+            <label class="field"><span>Payer last name <small>(must match your last name)</small></span><input id="reg-payer-last-name" type="text" required /></label>
+            <label class="field"><span>Username</span><input id="reg-username" type="text" autocomplete="username" required /></label>
+            <label class="field"><span>Email</span><input id="reg-email" type="email" autocomplete="email" required /></label>
+            <label class="field"><span>Password <small>(min. 8 characters)</small></span><input id="reg-password" type="password" autocomplete="new-password" minlength="8" required /></label>
+            <label class="field"><span>Phone</span><input id="reg-phone" type="tel" required /></label>
+            <div class="field full-width address-group-label">Shipping address <small>(where your orders will be delivered)</small></div>
+            <label class="field full-width"><span>Street address</span><input id="reg-street-address" type="text" placeholder="Street address" required /></label>
+            <label class="field"><span>City</span><input id="reg-city" type="text" placeholder="City" required /></label>
+            <label class="field"><span>State</span>
+              <select id="reg-state" required>
+                <option value="">Choose state</option>
+                <option>Lagos</option>
+                <option>Abuja FCT</option>
+                <option>Oyo</option>
+                <option>Ogun</option>
+                <option>Rivers</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <div class="field full-width address-group-label">Physical (home) address <small>(where you actually live)</small></div>
+            <label class="field full-width"><span>Street address</span><input id="reg-physical-street-address" type="text" placeholder="Street address" required /></label>
+            <label class="field"><span>City</span><input id="reg-physical-city" type="text" placeholder="City" required /></label>
+            <label class="field"><span>State</span>
+              <select id="reg-physical-state" required>
+                <option value="">Choose state</option>
+                <option>Lagos</option>
+                <option>Abuja FCT</option>
+                <option>Oyo</option>
+                <option>Ogun</option>
+                <option>Rivers</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="field full-width"><span><input id="reg-same-address" type="checkbox" /> My physical address is the same as my shipping address</span></label>
+            <label class="field full-width"><span>National Identification Number (NIN) <span class="required-mark">Required</span></span><input id="reg-nin" type="text" inputmode="numeric" pattern="\d{11}" maxlength="11" placeholder="11-digit NIN" required /></label>
+            <label class="field"><span>ID type</span>
+              <select id="reg-id-type" required>
+                <option value="NIN">National Identification Number (NIN)</option>
+                <option value="Passport">International passport</option>
+                <option value="Drivers License">Driver's license</option>
+                <option value="Voters Card">Voter's card</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <label class="field full-width"><span>ID number</span><input id="reg-id-number" type="text" required /></label>
+            <div class="screenshot-upload" id="id-document-upload">
+              <label class="screenshot-drop" for="id-document-file">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4-4 4M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+                <span><strong>Upload identification document <span class="required-mark">Required</span></strong><small>PNG or JPG, up to 8MB. Used for manual verification only.</small></span>
+                <input id="id-document-file" type="file" accept="image/png,image/jpeg,image/webp" required />
+              </label>
+              <div class="screenshot-preview" id="id-document-preview" hidden>
+                <img id="id-document-preview-image" alt="Uploaded ID document" />
+                <div><strong id="id-document-file-name">document.png</strong><small>Attached — reviewed manually.</small></div>
+                <button id="id-document-remove" class="screenshot-remove" type="button" aria-label="Remove document">×</button>
+              </div>
+            </div>
+            <div class="screenshot-upload selfie-capture full-width" id="selfie-capture">
+              <span class="selfie-capture-label"><strong>Live photo verification <span class="required-mark">Required</span></strong><small>Take a quick photo of yourself to help us verify your identity. This must be a live camera photo, not an uploaded image.</small></span>
+              <div class="selfie-capture-stage">
+                <video id="selfie-video" autoplay muted playsinline hidden></video>
+                <canvas id="selfie-canvas" hidden></canvas>
+                <div class="screenshot-preview selfie-preview" id="selfie-preview" hidden>
+                  <img id="selfie-preview-image" alt="Captured live photo" />
+                  <div><strong>Live photo captured</strong><small>Attached — reviewed manually.</small></div>
+                </div>
+              </div>
+              <p id="selfie-error" class="screenshot-message" hidden></p>
+              <div class="selfie-capture-actions">
+                <button type="button" class="small-button ghost" id="selfie-start">Take a live photo</button>
+                <button type="button" class="small-button" id="selfie-shoot" hidden>Capture</button>
+                <button type="button" class="small-button ghost" id="selfie-retake" hidden>Retake</button>
+              </div>
+            </div>
+          </div>
+          <p id="register-error" class="form-error" hidden></p>
+          <button class="primary-button" type="submit">Create account <span aria-hidden="true">→</span></button>
+        </form>
+      </div>
+
+      <div id="auth-panel-success" class="auth-panel" hidden>
+        <span class="eyebrow">ACCOUNT CREATED</span>
+        <h2>Registration received</h2>
+        <p>Your account is pending identity verification. This is usually reviewed within one business day.</p>
+        <div class="shopper-code-callout">
+          <span>Your shopper code</span>
+          <strong id="shopper-code-display">NB-00000</strong>
+          <small>You’ll need this for your orders — keep it handy.</small>
+        </div>
+        <button class="primary-button" type="button" data-auth-tab="login">Go to log in <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="account-modal" hidden>
+    <section class="modal account-modal" role="dialog" aria-modal="true" aria-labelledby="account-title">
+      <button class="close-button" type="button" data-close-modal aria-label="Close">×</button>
+      <span class="eyebrow" id="account-status-eyebrow">MY ACCOUNT</span>
+      <h2 id="account-title">Account</h2>
+      <div id="account-body"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="payment-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="payment-title">
+      <button class="close-button" type="button" data-close-modal aria-label="Close">×</button>
+      <span class="eyebrow">PAYMENT</span>
+      <h2 id="payment-title">Pay for your order</h2>
+      <div id="payment-body"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="order-updates-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="order-updates-title">
+      <button class="close-button" type="button" data-close-modal aria-label="Close">×</button>
+      <span class="eyebrow">ORDER UPDATES</span>
+      <h2 id="order-updates-title">Order updates</h2>
+      <div id="order-updates-body"></div>
+    </section>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

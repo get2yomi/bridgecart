@@ -1,0 +1,25 @@
+dist/
+site.tar.gz
+node_modules/
+.env
+backend/uploads/
+.claude/
+
+# Large files (logs, archives, media, DB dumps/backups) that shouldn't be committed
+# Note: *.sql is NOT ignored — backend/src/db/schema.sql and scripts/*.sql are real source files.
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+*.dump
+*.sqlite
+*.sqlite3
+*.db.bak
+*.bak
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.iso
